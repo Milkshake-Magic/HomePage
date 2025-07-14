@@ -34,6 +34,37 @@
 
 
 
+.category-switcher {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.category-btn {
+  background: #fff;
+  border: 2px solid var(--hot-pink);
+  color: var(--hot-pink);
+  padding: 10px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100px;
+  transition: 0.3s;
+}
+
+.category-btn.active {
+  background: var(--hot-pink);
+  color: #fff;
+}
+
+.category-btn:hover {
+  transform: scale(1.05);
+}
+
+
 
 .lightbox a.lb-prev,
 .lightbox a.lb-next {
@@ -1093,9 +1124,19 @@ button:hover {
   <!-- Menu Section -->
  <section>
   <h2 class="menu1">Menü</h2>
+
+   <div class="category-switcher">
+  <div class="category-btn active" data-category="milkshakes">
+    🥤<br>Milkshake
+  </div>
+  <div class="category-btn" data-category="juices">
+    🍹<br>Taze Meyve Suyu! 
+  </div>
+</div>
   <div class="menu">
 
     <!-- Chocolate -->
+    <div class="category-section" data-category="milkshakes">
     <div class="flavor" data-name="Muzlu ve Çikolatalı Milkshake" data-price="100">
       <div class="image-container">
         <a href="banana.jpeg"
@@ -1169,6 +1210,26 @@ button:hover {
       <p>Zengin çikolata ve kremamsı tat, kalbi ferahlatır.</p>
       <p class="price">80 ₺</p>
       <button class="add-btn">Ekle</button>
+    </div>
+    <div class="category-section" data-category="juices" style="display: none;">
+    <div class="flavor" data-name="عصير مانجا" data-price="80">
+            <div class="image-container">
+        <a href="mango.png"
+           data-lightbox="mango-only"
+           data-title="عصير مانجا">
+          <img class="flavor-img"
+               src="mango.png"
+               alt="عصير مانجا منعش وطبيعي" />
+          <div class="zoom-hint">
+            <img src="tap-finger.gif" alt="Tap here" class="tap-gif" />
+            <div class="hint-text">اضغط للتكبير</div>
+          </div>
+        </a>
+      </div>
+      <h3>🥭 عصير مانجا طبيعي</h3>
+      <p>عصير مانجا منعش وطبيعي</p>
+      <p class="price">80 ₺</p>
+      <button class="add-btn">أضف</button>
     </div>
 
   </div>
@@ -1708,7 +1769,19 @@ document.addEventListener("DOMContentLoaded", function() {
   observer.observe(menu);
 });
 
+document.querySelectorAll('.category-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    // 1. Set active style
+    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
 
+    // 2. Show relevant category
+    const selected = btn.dataset.category;
+    document.querySelectorAll('.category-section').forEach(section => {
+      section.style.display = (section.dataset.category === selected) ? 'grid' : 'none';
+    });
+  });
+});
     
 
 
