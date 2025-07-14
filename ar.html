@@ -1164,12 +1164,26 @@ button:hover {
     </section>
 
 
+
+
+
+
+<!-- Category Switcher -->
+<div class="category-switcher">
+  <div class="category-btn active" data-category="milkshakes">
+    🥤<br>ميلك شيك
+  </div>
+  <div class="category-btn" data-category="juices">
+    🍹<br>عصيرات
+  </div>
+</div>
   <!-- Menu Section -->
 <section>
   <h2 class="menu1">المنيو</h2>
   <div class="menu">
 
     <!-- Milkshake 1 -->
+  <div class="category-section" data-category="milkshakes">
     <div class="flavor" data-name="ميلك شيك موز وشوكولاتة" data-price="100">
       <div class="image-container">
         <a href="banana.jpeg"
@@ -1254,6 +1268,21 @@ button:hover {
     </div>
 
   </div>
+  </div>
+
+    <div class="category-section" data-category="juices" style="display: none;">
+    <div class="flavor" data-name="عصير مانجا" data-price="70">
+      <div class="image-container">
+        <img class="flavor-img" src="mango.jpeg" alt="عصير مانجا" />
+      </div>
+      <h3>🥭 عصير مانجا</h3>
+      <p>عصير مانجا مجمّدة منعش وطبيعي 100%</p>
+      <p class="price">0 ₺</p>
+      <button class="add-btn">أضف</button>
+    </div>
+    <!-- Add more juices if you want -->
+  </div>
+</div>
 </section>
 
 
