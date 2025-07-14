@@ -33,6 +33,37 @@
       box-sizing: border-box;
     }
 
+
+.category-switcher {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.category-btn {
+  background: #fff;
+  border: 2px solid var(--hot-pink);
+  color: var(--hot-pink);
+  padding: 10px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100px;
+  transition: 0.3s;
+}
+
+.category-btn.active {
+  background: var(--hot-pink);
+  color: #fff;
+}
+
+.category-btn:hover {
+  transform: scale(1.05);
+}
+
 .flavor-img {
   max-width: 100%;
   height: auto;
@@ -1831,7 +1862,19 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+document.querySelectorAll('.category-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    // 1. Set active style
+    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
 
+    // 2. Show relevant category
+    const selected = btn.dataset.category;
+    document.querySelectorAll('.category-section').forEach(section => {
+      section.style.display = (section.dataset.category === selected) ? 'grid' : 'none';
+    });
+  });
+});
 
 
 
