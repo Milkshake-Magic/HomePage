@@ -31,6 +31,21 @@
       box-sizing: border-box;
     }
 
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+.flavor {
+  margin: auto;
+}
 
 .category-section {
   display: grid;
@@ -440,6 +455,12 @@ header {
       margin-top: 20px;
     }
 
+    .menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
     .flavor {
       flex: 1 1 calc(50% - 20px);
       background: #fff;
@@ -448,6 +469,17 @@ header {
       box-shadow: 0 4px 8px var(--shadow);
       position: relative;
     }
+    .flavor {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center; /* ✅ center content inside */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* ✅ center horizontally */
+  justify-content: center;
+}
 
     /* ===== FLOATING MILK-BOTTLE BACKGROUND ===== */
     .floating-bottles{
