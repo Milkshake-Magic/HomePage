@@ -238,6 +238,23 @@ header {
   margin-top: 4px;
 }
 
+.zoom-hint {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 4px 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  z-index: 2;
+}
+.tap-gif {
+  width: 24px;
+  margin-left: 5px;
+}
+
 
 .lightbox .lb-outerContainer {
   margin-top: 10px;  /* move everything up */
@@ -1376,12 +1393,14 @@ button:hover {
     <div class="image-container">
       <a href="mango.png" data-lightbox="mango-only" data-title="🥭 عصير مانجا">
         <img class="flavor-img" src="mango.png" alt="عصير مانجا" />
-        <div class="zoom-hint">
-          <img src="tap-finger.gif" alt="اضغط هنا" class="tap-gif" />
-          <div class="hint-text">اضغط للتكبير</div>
-        </div>
       </a>
+      <!-- ✅ Now it's outside the <a> -->
+      <div class="zoom-hint">
+        <img src="tap-finger.gif" alt="اضغط هنا" class="tap-gif" />
+        <div class="hint-text">اضغط للتكبير</div>
+      </div>
     </div>
+
     <h3>🥭 عصير مانجا</h3>
     <p>عصير مانجا طبيعي 100%، محضر من مانجا مجمدة ومنعش.</p>
     <p class="price">80 ₺</p>
