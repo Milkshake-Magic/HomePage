@@ -238,22 +238,7 @@ header {
   margin-top: 4px;
 }
 
-.zoom-hint {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  background-color: rgba(255, 255, 255, 0.7);
-  padding: 4px 8px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  font-size: 0.8rem;
-  z-index: 2;
-}
-.tap-gif {
-  width: 24px;
-  margin-left: 5px;
-}
+
 
 
 .lightbox .lb-outerContainer {
@@ -1925,37 +1910,34 @@ const langBtn = document.getElementById("langToggle");
 langBtn.textContent = "Türkçe";
 langBtn.onclick = () => window.location.href = "./tr";
 
-document.addEventListener("DOMContentLoaded", function() {
-  const menu = document.querySelector('.menu');
-  const hints = menu.querySelectorAll('.zoom-hint');
+document.addEventListener("DOMContentLoaded", function () {
+  const hints = document.querySelectorAll('.zoom-hint');
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Fade in
-        hints.forEach(hint => {
-          hint.style.opacity = 1;
-        });
+        const hint = entry.target;
 
-        // Wait 3 sec, fade out
+        // Show
+        hint.style.opacity = 1;
+
+        // Hide after 3 seconds
         setTimeout(() => {
-          hints.forEach(hint => {
-            hint.style.opacity = 0;
-          });
+          hint.style.opacity = 0;
         }, 3000);
 
-        // Stop observing so it happens only once
-        observer.unobserve(menu);
+        observer.unobserve(hint); // only once per hint
       }
     });
   }, {
-    threshold: 0.3 // Trigger when 30% visible
+    threshold: 0.3
   });
 
-  observer.observe(menu);
+  hints.forEach(hint => observer.observe(hint));
 });
 
 
+// Category switcher — unchanged
 document.querySelectorAll('.category-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     // 1. Set active style
@@ -1973,8 +1955,6 @@ document.querySelectorAll('.category-btn').forEach(btn => {
 
 
 
-
-</script>
 
 
 </body>
