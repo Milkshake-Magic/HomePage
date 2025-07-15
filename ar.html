@@ -1911,50 +1911,59 @@ langBtn.textContent = "Türkçe";
 langBtn.onclick = () => window.location.href = "./tr";
 
 document.addEventListener("DOMContentLoaded", function () {
-  const hints = document.querySelectorAll('.zoom-hint');
+  const observeZoomHints = () => {
+    const hints = document.querySelectorAll('.zoom-hint');
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const hint = entry.target;
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const hint = entry.target;
 
-        // Show
-        hint.style.opacity = 1;
+          // Show
+          hint.style.opacity = 1;
 
-        // Hide after 3 seconds
-        setTimeout(() => {
-          hint.style.opacity = 0;
-        }, 3000);
+          // Hide after 3 seconds
+          setTimeout(() => {
+            hint.style.opacity = 0;
+          }, 3000);
 
-        observer.unobserve(hint); // only once per hint
+          observer.unobserve(hint); // only once per hint
+        }
+      });
+    }, {
+      threshold: 0.3
+    });
+
+    hints.forEach(hint => {
+      // Only observe if parent section is visible
+      const parentSection = hint.closest('.category-section');
+      if (parentSection && getComputedStyle(parentSection).display !== 'none') {
+        observer.observe(hint);
       }
     });
-  }, {
-    threshold: 0.3
-  });
+  };
 
-  hints.forEach(hint => observer.observe(hint));
-});
+  // Run once on load
+  observeZoomHints();
 
+  // Category Switcher
+  document.querySelectorAll('.category-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // 1. Set active style
+      document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-// Category switcher — unchanged
-document.querySelectorAll('.category-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    // 1. Set active style
-    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+      // 2. Show relevant category
+      const selected = btn.dataset.category;
+      document.querySelectorAll('.category-section').forEach(section => {
+        section.style.display = (section.dataset.category === selected) ? 'grid' : 'none';
+      });
 
-    // 2. Show relevant category
-    const selected = btn.dataset.category;
-    document.querySelectorAll('.category-section').forEach(section => {
-      section.style.display = (section.dataset.category === selected) ? 'grid' : 'none';
+      // 3. Re-observe newly visible hints
+      observeZoomHints();
     });
   });
 });
-
-
-
-
 
 
 </body>
