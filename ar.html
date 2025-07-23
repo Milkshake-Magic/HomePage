@@ -1787,6 +1787,7 @@ function convertArabicDigitsToEnglish(str) {
 
 /* ---------- click handler for the green button ---------- */
 document.getElementById("btnPlace").onclick = () => {
+  fbq('trackCustom', 'PlaceOrder');
   // 1) grab inputs
   const nameInput  = document.getElementById("nameInput");
   const daireInput = document.getElementById("daireInput");
