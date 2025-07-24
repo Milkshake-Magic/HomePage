@@ -1832,10 +1832,12 @@ document.getElementById("btnPlace").onclick = () => {
     document.querySelector(".input-invalid")?.scrollIntoView({ behavior: "smooth", block: "center" });
     return;
   }
-  fbq('trackCustom', 'PlaceOrder');
+  
+
 
   // 4) all good → place the order
   placeOrderNow({
+    fbq('track', 'PlaceOrder');
     name  : nameInput.value.trim(),
     daire : daireValue,
     block : blockValue,
