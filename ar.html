@@ -1833,11 +1833,10 @@ document.getElementById("btnPlace").onclick = () => {
     return;
   }
   
-
+  fbq('track', 'PlaceOrder');
 
   // 4) all good → place the order
   placeOrderNow({
-    fbq('track', 'PlaceOrder');
     name  : nameInput.value.trim(),
     daire : daireValue,
     block : blockValue,
